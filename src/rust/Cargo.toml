@@ -1,0 +1,30 @@
+[package]
+name = "amoebit-minter"
+version = "0.0.1"
+description = ""
+authors = ["vlawmz <@flawmz>"]
+repository = "https://github.com/Flawm/solana_minter"
+license = "GPL-2.0"
+homepage = "https://amoebits.io"
+edition = "2018"
+
+[features]
+no-entrypoint = []
+
+[dependencies]
+num-traits = "0.2"
+num-derive = "0.3"
+borsh = "0.9.1"
+borsh-derive = "0.9.1"
+solana-program = "=1.7.14"
+spl-token-metadata = { path = "mdp/rust/token-metadata/program", version="0.0.1", features = [ "no-entrypoint" ] }
+spl-token = { version="3.2.0", features = [ "no-entrypoint" ] }
+thiserror = "1.0"
+
+[dev-dependencies]
+solana-program-test = "=1.7.14"
+solana-sdk = "=1.7.14"
+
+[lib]
+crate-type = ["cdylib"]
+path = "src/entrypoint.rs"
