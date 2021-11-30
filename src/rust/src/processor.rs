@@ -32,6 +32,7 @@ const TOKEN_META_PROGRAM: &str = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s";
 const OUR_PUB_KEY: &str        = "82UV2Exn5FaS4Ys1fxiHBPW1tQVeU1R76BbVkAE7WaTL";
 const OUR_WALLET: &str         = "AmbtTL5LS42RFL1ZL5QQan8ZSyn27pvVoCbFYF2eTwyH";
 const RENT_ACCOUNT: &str       = "SysvarRent111111111111111111111111111111111";
+const INDEX_KEY: &str          = "";
 
 // DEVNET
 //const MINT_KEY: &str           = "DwuhyNAQYjJHKZJEkVLy5Phoz83Tty6whVcZ79eQ7rXs";
@@ -72,6 +73,7 @@ pub fn process_instruction<'a>(
     let discount_payer_account = next_account_info(accounts_iter)?; // 14
 
     // SAFETY CHECKS
+    if index_account.key.to_string()         != INDEX_KEY          { return Err(ProgramError::InvalidAccountData); }
     if index_account.owner                   != program_id         { return Err(ProgramError::InvalidAccountData); }
     if wallet_account.key.to_string()        != OUR_WALLET         { return Err(ProgramError::InvalidAccountData); }
     if token_account.owner.to_string()       != TOKEN_PROGRAM      { return Err(ProgramError::InvalidAccountData); }
