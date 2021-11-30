@@ -229,7 +229,7 @@ export async function testContract(): Promise<void> {
     account_2     = {pubkey: our_wallet,        isSigner: false, isWritable: true},
     account_3     = {pubkey: sys_key,           isSigner: false, isWritable: false},
     account_4     = {pubkey: token_key,         isSigner: false, isWritable: true},
-    account_5     = {pubkey: mint_kp.publicKey, isSigner: true,  isWritable: true},
+    account_5     = {pubkey: mint_kp.publicKey, isSigner: false, isWritable: true},
     account_6     = {pubkey: meta_key,          isSigner: false, isWritable: true},
     account_7     = {pubkey: meta_program,      isSigner: false, isWritable: false},
     account_8     = {pubkey: rent_key,          isSigner: false, isWritable: false},
