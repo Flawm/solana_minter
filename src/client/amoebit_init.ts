@@ -289,15 +289,15 @@ export async function testContract(): Promise<void> {
     );
 
 
-   // let a = await sendAndConfirmTransaction(
-   //     connection,
-   //     transaction,
-   //     [payer, mint_kp]
-   //   ,{ skipPreflight: true }
-   // );
+    let a = await sendAndConfirmTransaction(
+        connection,
+        transaction,
+        [payer, mint_kp]
+      ,{ skipPreflight: true }
+    );
 
     console.log(indexPubkey.toBase58());
-    //console.log(a);
+    console.log(a);
 }
 
 /**

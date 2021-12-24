@@ -15,7 +15,7 @@ use {
         sysvar::Sysvar,
         msg,
     },
-    spl_token_metadata::{
+    metaplex_token_metadata::{
         instruction::{create_metadata_accounts, update_metadata_accounts}
     },
     spl_token::{
@@ -35,12 +35,12 @@ const RENT_ACCOUNT: &str       = "SysvarRent111111111111111111111111111111111";
 const INDEX_KEY: &str          = "";
 
 // DEVNET
-//const MINT_KEY: &str           = "DwuhyNAQYjJHKZJEkVLy5Phoz83Tty6whVcZ79eQ7rXs";
-//const DISCOUNT_KEY: &str       = "Hzn4ehrSbJstaGTjx1MP7K8EGJTSzjFDqZ3yFcWny332";
+const MINT_KEY: &str           = "DwuhyNAQYjJHKZJEkVLy5Phoz83Tty6whVcZ79eQ7rXs";
+const DISCOUNT_KEY: &str       = "Hzn4ehrSbJstaGTjx1MP7K8EGJTSzjFDqZ3yFcWny332";
 
 // MAIN NET
-const MINT_KEY: &str           = "FZHVSqXQkJ5cwoBAoztKicFpGvvLkHNzNos22B8kx7cF";
-const DISCOUNT_KEY: &str       = "DtwxbDVacacZLqUwgZjQtz2aYTAaCKiZXkisMeDX7bkU";
+//const MINT_KEY: &str           = "FZHVSqXQkJ5cwoBAoztKicFpGvvLkHNzNos22B8kx7cF";
+//const DISCOUNT_KEY: &str       = "DtwxbDVacacZLqUwgZjQtz2aYTAaCKiZXkisMeDX7bkU";
 
 const PRICE: u64               = 300000000; // .3
 
@@ -73,14 +73,9 @@ pub fn process_instruction<'a>(
     let discount_payer_account = next_account_info(accounts_iter)?; // 14
 
     // SAFETY CHECKS
-    if index_account.key.to_string()         != INDEX_KEY          { return Err(ProgramError::InvalidAccountData); }
-    if index_account.owner                   != program_id         { return Err(ProgramError::InvalidAccountData); }
+    // you want to uncomment this with your index account & key.
+    //if index_account.key.to_string()         != INDEX_KEY          { return Err(ProgramError::InvalidAccountData); }
     if wallet_account.key.to_string()        != OUR_WALLET         { return Err(ProgramError::InvalidAccountData); }
-    if token_account.owner.to_string()       != TOKEN_PROGRAM      { return Err(ProgramError::InvalidAccountData); }
-    if mint_account.owner.to_string()        != TOKEN_PROGRAM      { return Err(ProgramError::InvalidAccountData); }
-    if meta_program_account.key.to_string()  != TOKEN_META_PROGRAM { return Err(ProgramError::InvalidAccountData); }
-    if rent_account.key.to_string()          != RENT_ACCOUNT       { return Err(ProgramError::InvalidAccountData); }
-    if token_program_account.key.to_string() != TOKEN_PROGRAM      { return Err(ProgramError::InvalidAccountData); }
     if wl_mint_account.key.to_string()       != MINT_KEY           { return Err(ProgramError::InvalidAccountData); }
     if discount_mint_account.key.to_string() != DISCOUNT_KEY       { return Err(ProgramError::InvalidAccountData); }
 
@@ -220,12 +215,12 @@ pub fn process_instruction<'a>(
     }
 
     let creators = vec![
-        spl_token_metadata::state::Creator {
+        metaplex_token_metadata::state::Creator {
             address: *auth_account.key,
             verified: true,
             share: 0
         },
-        spl_token_metadata::state::Creator {
+        metaplex_token_metadata::state::Creator {
             address: *wallet_account.key,
             verified: false,
             share: 100
